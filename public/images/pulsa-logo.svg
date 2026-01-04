@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#ff8a00"/>
+      <stop offset="1" stop-color="#3358ff"/>
+    </linearGradient>
+    <style>
+      .bg{fill:url(#g)}
+      .bubble{fill:#fff;opacity:0.05}
+      .p{fill:#fff;font-family:Arial, Helvetica, sans-serif;font-weight:700;font-size:220px}
+      .name{fill:#333;font-family:Arial, Helvetica, sans-serif;font-weight:800;font-size:48px}
+      .sub{fill:#666;font-family:Arial, Helvetica, sans-serif;font-size:18px}
+    </style>
+  </defs>
+  <!-- transparent background (no rect fill) -->
+  <g transform="translate(40,40)">
+    <path class="bg" d="M260 20c84 0 152 68 152 152s-68 152-152 152c-20 0-38-3-55-9l-74 58 13-82c-32-39-50-88-50-143C64 88 136 20 260 20z"/>
+    <text x="170" y="260" class="p">P</text>
+  </g>
+  <text x="320" y="430" class="name">PULSA</text>
+  <text x="320" y="460" class="sub">Publik Suara Aspirasi</text>
+</svg>

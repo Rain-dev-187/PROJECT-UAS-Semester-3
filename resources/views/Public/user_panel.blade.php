@@ -65,9 +65,9 @@
         font-size: 0.8rem;
         letter-spacing: 0.5px;
     }
-    .table-custom tbody tr.clickable-row{cursor:pointer}
 </style>
 @endpush
+
 
 @section('content')
     <!-- Welcome Banner -->
@@ -84,34 +84,74 @@
         </div>
     </div>
 
-    <!-- Quick Actions & Stats -->
-    <div class="row g-4 mb-4">
-        <!-- Account (beside Total Opini) -->
-        <div class="col-md-6 col-lg-3">
-            <div class="stat-card-custom d-flex gap-3 align-items-center">
-                <div style="width:64px">
-                    @if(! empty($user->photo))
-                        <img src="{{ Storage::url($user->photo) }}" alt="avatar" style="width:64px;height:64px;object-fit:cover;border-radius:8px">
-                    @else
-                        <i class="fas fa-user-circle fa-3x text-muted"></i>
-                    @endif
-                </div>
-                <div class="flex-fill">
-                    <div class="fw-bold">{{ $user->name }}</div>
-                    <div class="small text-muted">{{ $user->email }}</div>
-                    @if(! empty($user->nickname))
-                        <div class="small text-muted">Nickname: {{ $user->nickname }}</div>
-                    @endif
-                    <div class="mt-2">
-                        @if(\Illuminate\Support\Facades\Route::has('user.profile.edit'))
-                            <a href="{{ route('user.profile.edit') }}" class="btn btn-sm btn-outline-secondary">Edit Profile</a>
-                        @endif
+    <!-- User Profile Card -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-3">
+                            @if($user->photo)
+                                <img src="{{ Storage::url($user->photo) }}" alt="Profile Photo" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; border: 3px solid var(--primary);">
+                            @else
+                                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 32px; font-weight: bold; border: 3px solid var(--primary);">
+                                    {{ strtoupper(substr($user->name, 0, 1)) }}
+                                </div>
+                            @endif
+                            <div>
+                                <h4 class="mb-1 fw-bold">{{ $user->name }}</h4>
+                                <p class="mb-0 text-muted">{{ $user->email }}</p>
+                                @if($user->nickname)
+                                    <p class="mb-0 text-muted small">{{ $user->nickname }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <a href="{{ route('user.profile.edit') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-user-edit me-2"></i>Edit Profil
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Suara Pembaca removed -->
+    <!-- Quick Actions & Stats -->
+    <div class="row g-4 mb-4">
+        <!-- Stats Opini -->
+        <div class="col-md-6 col-lg-3">
+            <div class="stat-card-custom d-flex flex-column justify-content-between">
+                <div>
+                    <div class="text-muted small fw-bold text-uppercase mb-1">Total Opini</div>
+                    <div class="d-flex align-items-baseline">
+                        <h2 class="fw-bold mb-0 text-primary">{{ $opiniCounts['total'] }}</h2>
+                        <span class="ms-2 badge bg-success bg-opacity-10 text-success rounded-pill">
+                            {{ $opiniCounts['approved'] }} Approved
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-3 text-muted small">
+                    <i class="fas fa-clock text-warning me-1"></i> {{ $opiniCounts['pending'] }} Menunggu Review
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Suara -->
+        <div class="col-md-6 col-lg-3">
+            <div class="stat-card-custom d-flex flex-column justify-content-between">
+                <div>
+                    <div class="text-muted small fw-bold text-uppercase mb-1">Suara Pembaca</div>
+                    <div class="d-flex align-items-baseline">
+                        <h2 class="fw-bold mb-0 text-success">{{ $suaraCounts['total'] }}</h2>
+                        <span class="ms-2 badge bg-success bg-opacity-10 text-success rounded-pill">
+                            {{ $suaraCounts['approved'] }} Approved
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-3 text-muted small">
+                    <i class="fas fa-clock text-warning me-1"></i> {{ $suaraCounts['pending'] }} Menunggu Review
+                </div>
+            </div>
+        </div>
 
         <!-- Action: Kirim Opini -->
         <div class="col-6 col-lg-3">
@@ -138,16 +178,7 @@
                         </thead>
                         <tbody>
                             @forelse($opinis->take(5) as $op)
-                                @php
-                                    if($op->status === 'approved' && ! empty($op->slug) && \Illuminate\Support\Facades\Route::has('opini.show')) {
-                                        $link = route('opini.show', $op->slug);
-                                    } elseif(\Illuminate\Support\Facades\Route::has('opini.showById')) {
-                                        $link = route('opini.showById', $op->id);
-                                    } else {
-                                        $link = '#';
-                                    }
-                                @endphp
-                                <tr class="clickable-row" onclick="if('{{ $link }}' !== '#') window.location='{{ $link }}'">
+                                <tr>
                                     <td class="ps-4">
                                         <div class="fw-bold text-dark">{{ \Illuminate\Support\Str::limit($op->judul, 40) }}</div>
                                     </td>
@@ -181,8 +212,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-
         </div>
 
 @endsection

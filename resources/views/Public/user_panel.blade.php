@@ -135,23 +135,7 @@
             </div>
         </div>
 
-        <!-- Stats Suara -->
-        <div class="col-md-6 col-lg-3">
-            <div class="stat-card-custom d-flex flex-column justify-content-between">
-                <div>
-                    <div class="text-muted small fw-bold text-uppercase mb-1">Suara Pembaca</div>
-                    <div class="d-flex align-items-baseline">
-                        <h2 class="fw-bold mb-0 text-success">{{ $suaraCounts['total'] }}</h2>
-                        <span class="ms-2 badge bg-success bg-opacity-10 text-success rounded-pill">
-                            {{ $suaraCounts['approved'] }} Approved
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-3 text-muted small">
-                    <i class="fas fa-clock text-warning me-1"></i> {{ $suaraCounts['pending'] }} Menunggu Review
-                </div>
-            </div>
-        </div>
+        <!-- Suara Pembaca removed -->
 
         <!-- Action: Kirim Opini -->
         <div class="col-6 col-lg-3">

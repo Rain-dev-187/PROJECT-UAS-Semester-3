@@ -104,12 +104,7 @@
                                     <p>Opini</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.suara-pembaca.index') }}" class="nav-link {{ request()->is('admin/suara-pembaca*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-bullhorn"></i>
-                                    <p>Suara Pembaca</p>
-                                </a>
-                            </li>
+                            <!-- Suara Pembaca removed -->
                             <li class="nav-item">
                                 <a href="{{ route('admin.team.index') }}" class="nav-link {{ request()->is('admin/team*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>
@@ -137,12 +132,7 @@
                                     <p>Kirim Opini</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('kirim-suara') }}" class="nav-link {{ request()->is('kirim-suara*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-bullhorn"></i>
-                                    <p>Kirim Suara</p>
-                                </a>
-                            </li>
+                            <!-- Kirim Suara removed -->
                             <li class="nav-item">
                                 <a href="{{ route('home') }}" class="nav-link">
                                     <i class="nav-icon fas fa-globe"></i>

@@ -97,28 +97,7 @@
             </a>
         </div>
         
-        <div class="col-sm-6 col-xl-3">
-            <a href="{{ route('admin.suara-pembaca.index') }}" style="text-decoration:none;color:inherit;display:block">
-                <div class="stat-card">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="stat-number">{{ $stats['total_suara'] }}</div>
-                            <div class="stat-label">Suara Pembaca</div>
-                        </div>
-                        <div class="stat-icon warning">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        @if($stats['suara_pending'] > 0)
-                            <small class="text-warning"><i class="fas fa-clock me-1"></i>{{ $stats['suara_pending'] }} Menunggu Review</small>
-                        @else
-                            <small class="text-success"><i class="fas fa-check-circle me-1"></i>Semua sudah direview</small>
-                        @endif
-                    </div>
-                </div>
-            </a>
-        </div>
+        <!-- Suara Pembaca stat card removed -->
         
         <div class="col-sm-6 col-xl-3">
             @can('manage users')

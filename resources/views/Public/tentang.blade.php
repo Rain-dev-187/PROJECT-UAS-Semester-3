@@ -194,15 +194,15 @@
                     
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>pulsa@email.com</span>
+                        <span><a href="mailto:Pulsacs187@gmail.com">Pulsacs187@gmail.com</a></span>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-whatsapp"></i>
-                        <span>08123456789</span>
+                        <span><a href="https://wa.me/6288220588345" target="_blank" rel="noopener">088220588345</a></span>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-instagram"></i>
-                        <span>@pulsa.id</span>
+                        <span><a href="https://instagram.com/pulsa.id" target="_blank" rel="noopener">@pulsa.id</a></span>
                     </div>
                 </div>
             </div>

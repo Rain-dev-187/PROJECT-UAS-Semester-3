@@ -30,82 +30,85 @@ composer install
 ```
 
 3. Salin file environment dan atur konfigurasi database:
+# PULSA — Publik Suara Aspirasi
+
+Ringkasan singkat
+- PULSA adalah aplikasi web untuk jurnalisme warga dan partisipasi publik. Pengguna bisa melihat berita/opini dan — jika terdaftar — mengirim opini. Admin dapat memoderasi konten, mengelola tim, dan pengguna.
+
+Persyaratan
+- PHP 8.1+ (disarankan 8.2)
+- Composer
+- Node.js & npm
+- Database MySQL / MariaDB (atau driver DB lain yang kompatibel dengan Laravel)
+
+Setup (lokal)
+1. Clone repository
 
 ```bash
-cp .env.example .env
-# Pada Windows PowerShell gunakan:
-copy .env.example .env
+git clone <repo-url> .
 ```
 
-Edit file `.env` untuk mengisi `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` sesuai pengaturan lokal Anda.
+2. Install dependensi PHP
 
-4. Generate application key:
+```bash
+composer install
+```
+
+3. Environment
+
+```bash
+cp .env.example .env   # (PowerShell: copy .env.example .env)
+```
+Edit `.env` untuk set `DB_*`, `APP_URL`, dan kredensial lain.
+
+4. Key & database
 
 ```bash
 php artisan key:generate
+php artisan migrate --seed   # seeder opsional
 ```
 
-5. Jalankan migrasi dan seeder (opsional):
-
-```bash
-php artisan migrate --seed
-```
-
-6. Buat symlink storage agar file hasil upload dapat diakses melalui web:
+5. Storage link
 
 ```bash
 php artisan storage:link
 ```
 
-7. Install dependensi frontend dan build aset:
+6. Frontend
 
 ```bash
 npm install
-npm run dev
-# atau untuk produksi:
-npm run build
+npm run dev    # atau `npm run build` untuk produksi
 ```
 
-8. Jalankan server lokal:
+7. Jalankan server
 
 ```bash
 php artisan serve
 ```
 
-Buka `http://127.0.0.1:8000` di browser.
+Umum: buka http://127.0.0.1:8000
 
-Catatan penting:
-- Pastikan folder `storage` dan `bootstrap/cache` dapat ditulisi (writable).
-- Jika aset CSS/JS tidak muncul, jalankan `npm run dev` lalu refresh browser.
+Perintah berguna
+- `composer dump-autoload` — regenerate autoload classmap setelah menambah/hapus kelas
+- `php artisan view:clear` — bersihkan cache Blade
+- `php artisan cache:clear` — bersihkan cache aplikasi
 
-## Akun Dummy (untuk testing)
-Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut (atau buat lewat seeder/register):
+Akun demo (opsional)
+- Buat user lewat halaman register, atau gunakan seeder/tinker untuk membuat admin manual.
 
-- Admin (super-admin / staff):
-	- Email: admin@pulsa.test
-	- Password: password123
+Perilaku aplikasi penting
+- Kirim Opini: pengiriman opini membutuhkan autentikasi. Jika pengguna belum login, akses `/kirim-opini` akan diarahkan ke halaman registrasi/login.
+- Upload file: pastikan `public/storage` tersedia (jalankan `php artisan storage:link`).
 
-- Staff:
-	- Email: staff@pulsa.test
-	- Password: password123
+Kontak maintainers
+- Email: Pulsacs187@gmail.com (link membuka Gmail compose di antarmuka)
 
-- User biasa: Daftar Manual
-	
+Catatan pengembangan
+- Beberapa fitur (mis. Suara Pembaca) sempat dimodifikasi/dihapus di kode — cek migration/file terkait jika ingin sepenuhnya menghapus schema.
 
-Jika seeder belum tersedia, Anda dapat membuat akun secara manual melalui halaman pendaftaran atau menggunakan `php artisan tinker`. Contoh membuat akun melalui Tinker:
-
-```php
-// Jalankan pada terminal: php artisan tinker
-\App\Models\User::create([
-		'name' => 'Admin',
-		'email' => 'admin@pulsa.test',
-		'password' => bcrypt('password123'),
-]);
-```
-
-## Catatan Tambahan
-- Opini dan Suara Pembaca yang dikirim biasanya disimpan dengan status `pending` dan perlu disetujui oleh admin agar muncul di halaman depan.
-- Jika gambar hasil upload tidak terlihat, pastikan `php artisan storage:link` sudah dijalankan dan file tersimpan di `public/storage`.
+Lisensi & Kontribusi
+- Tambahkan keterangan lisensi atau aturan kontribusi jika diperlukan.
 
 ---
 Kelompok 4 — PULSA

@@ -194,7 +194,7 @@
                     
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=Pulsacs187@gmail.com" target="_blank" rel="noopener">Pulsacs187@gmail.com</a></span>
+                        <span><a href="https://mail.google.com/mail/?view=cm&fs=1&to=pulsacs187@gmail.com" target="_blank" rel="noopener">Pulsacs187@gmail.com</a></span>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-whatsapp"></i>

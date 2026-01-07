@@ -379,7 +379,7 @@
                             Apabila pengguna mengalami kendala atau membutuhkan informasi lebih lanjut terkait website 
                             Publik Suara Aspirasi (PULSA), silakan menghubungi tim pengelola melalui kontak yang tersedia.
                         </p>
-                        <p class="mb-2"><i class="fas fa-envelope me-2"></i> Email: <a href="mailto:Pulsacs187@gmail.com">Pulsacs187@gmail.com</a></p>
+                        <p class="mb-2"><i class="fas fa-envelope me-2"></i> Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Pulsacs187@gmail.com" target="_blank" rel="noopener">Pulsacs187@gmail.com</a></p>
                         <p class="mb-2"><i class="fab fa-whatsapp me-2"></i> WhatsApp: <a href="https://wa.me/6288220588345" target="_blank" rel="noopener">088220588345</a></p>
                         <p class="mb-0"><i class="fab fa-instagram me-2"></i> Instagram: <a href="https://instagram.com/pulsa.id" target="_blank" rel="noopener">@pulsa.id</a></p>
                     </div>

@@ -99,6 +99,9 @@
                 <div class="flex-fill">
                     <div class="fw-bold">{{ $user->name }}</div>
                     <div class="small text-muted">{{ $user->email }}</div>
+                    @if(! empty($user->nickname))
+                        <div class="small text-muted">Nickname: {{ $user->nickname }}</div>
+                    @endif
                     <div class="mt-2">
                         @if(\Illuminate\Support\Facades\Route::has('user.profile.edit'))
                             <a href="{{ route('user.profile.edit') }}" class="btn btn-sm btn-outline-secondary">Edit Profile</a>
@@ -180,32 +183,6 @@
             </div>
         </div>
 
-        <!-- Account Card -->
-        <div class="col-lg-6">
-            <div class="card border-0 shadow-sm h-100" style="border-radius: 12px;">
-                <div class="card-body d-flex gap-3 align-items-center">
-                    <div style="width:96px">
-                        @if(! empty($user->photo))
-                            <img src="{{ Storage::url($user->photo) }}" alt="avatar" style="width:96px;height:96px;object-fit:cover;border-radius:8px">
-                        @else
-                            <i class="fas fa-user-circle fa-5x text-muted"></i>
-                        @endif
-                    </div>
-                    <div class="flex-fill">
-                        <div class="fw-bold fs-5">{{ $user->name }}</div>
-                        <div class="text-muted small">{{ $user->email }}</div>
-                        @if(! empty($user->nickname))
-                            <div class="text-muted small">Nickname: {{ $user->nickname }}</div>
-                        @endif
-                        <div class="mt-3">
-                            @if(\Illuminate\Support\Facades\Route::has('user.profile.edit'))
-                                <a href="{{ route('user.profile.edit') }}" class="btn btn-sm btn-outline-secondary">Edit Profile</a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
 @endsection
-@extends('layouts.legacy_user')

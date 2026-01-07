@@ -1,3 +1,8 @@
+ # PULSA — Publik Suara Aspirasi
+
+**Kelompok:** Kelompok 4
+- Ahmad Sahrul F - 20241320031
+- 
 
 ## Deskripsi Aplikasi
 PULSA adalah aplikasi web untuk jurnalisme warga dan partisipasi publik. Aplikasi ini memungkinkan masyarakat mengirimkan opini dan suara pembaca, sementara tim admin dapat memoderasi konten, mengelola tim, serta mengatur pengguna.

@@ -1,108 +1,112 @@
-# PULSA — Publik Suara Aspirasi
 
-Singkat
-- PULSA adalah aplikasi Laravel untuk jurnalisme warga: berita, opini, dan moderasi.
+## Deskripsi Aplikasi
+PULSA adalah aplikasi web untuk jurnalisme warga dan partisipasi publik. Aplikasi ini memungkinkan masyarakat mengirimkan opini dan suara pembaca, sementara tim admin dapat memoderasi konten, mengelola tim, serta mengatur pengguna.
 
-Persyaratan
-- PHP 8.1+ (disarankan 8.2)
+Fitur utama:
+- Halaman depan (landing page) yang menampilkan berita, opini, dan suara pembaca
+- Panel admin untuk moderasi berita, opini, suara pembaca, tim, dan pengguna
+- Panel pengguna untuk mengirim opini dan suara serta melihat status kiriman
+- Upload gambar untuk penulis/opini dan anggota tim
+
+## Cara Instalasi (Lokal)
+Persyaratan minimal:
+- PHP 8.1 atau lebih baru
 - Composer
-- Node.js & npm
-- MySQL / MariaDB (atau DB lain kompatibel dengan Laravel)
+- Node.js dan npm
+- MySQL (atau database lain yang kompatibel dengan Laravel)
 
-Instalasi (lokal)
+Langkah instalasi:
 
-1. Clone repository
+1. Clone repository ke direktori kerja:
 
 ```bash
 git clone <repo-url> .
 ```
 
-2. Install dependensi PHP
+2. Install dependensi PHP:
 
 ```bash
 composer install
 ```
 
-3. Salin .env dan atur konfigurasi
+3. Salin file environment dan atur konfigurasi database:
 
 ```bash
-copy .env.example .env    # PowerShell
+cp .env.example .env
+# Pada Windows PowerShell gunakan:
+copy .env.example .env
 ```
-Edit `.env` untuk `DB_*`, `APP_URL`, dan kredensial lain.
 
-4. Generate key & migrasi
+Edit file `.env` untuk mengisi `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` sesuai pengaturan lokal Anda.
+
+4. Generate application key:
 
 ```bash
 php artisan key:generate
-php artisan migrate --seed   # seeder opsional
 ```
 
-5. Storage link
+5. Jalankan migrasi dan seeder (opsional):
+
+```bash
+php artisan migrate --seed
+```
+
+6. Buat symlink storage agar file hasil upload dapat diakses melalui web:
 
 ```bash
 php artisan storage:link
 ```
 
-6. Frontend
+7. Install dependensi frontend dan build aset:
 
 ```bash
 npm install
-npm run dev    # atau `npm run build` untuk produksi
+npm run dev
+# atau untuk produksi:
+npm run build
 ```
 
-7. Jalankan server
+8. Jalankan server lokal:
 
 ```bash
 php artisan serve
 ```
 
-Perintah berguna
-- `composer dump-autoload` — regenerasi autoload setelah menambah/hapus kelas
-- `php artisan view:clear` — bersihkan cache Blade
-- `php artisan cache:clear` — bersihkan cache aplikasi
+Buka `http://127.0.0.1:8000` di browser.
 
-Catatan penting
-- Kirim Opini: pengiriman opini memerlukan autentikasi. Akses `/kirim-opini` akan mengarahkan pengguna yang belum login ke halaman registrasi/login.
-- Fitur "Suara Pembaca": UI dan model telah dihapus dari kode; migrasi untuk tabel `suara_pembacas` masih ada. Jika kamu ingin menghapus schema dari database, jalankan:
+Catatan penting:
+- Pastikan folder `storage` dan `bootstrap/cache` dapat ditulisi (writable).
+- Jika aset CSS/JS tidak muncul, jalankan `npm run dev` lalu refresh browser.
 
-  - Hapus table manual (MySQL): `DROP TABLE suara_pembacas;`
-  - Atau buat migration yang meng-drop table dan jalankan `php artisan migrate`.
+## Akun Dummy (untuk testing)
+Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut (atau buat lewat seeder/register):
 
-Contoh .env (ringkas)
+- Admin (super-admin / staff):
+	- Email: admin@pulsa.test
+	- Password: password123
 
-```
-APP_NAME=PULSA
-APP_ENV=local
-APP_KEY=
-APP_DEBUG=true
-APP_URL=http://localhost
+- Staff:
+	- Email: staff@pulsa.test
+	- Password: password123
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=root
-DB_PASSWORD=
+- User biasa: Daftar Manual
+	
 
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.example.com
-MAIL_PORT=587
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS=Pulsacs187@gmail.com
-MAIL_FROM_NAME="PULSA"
+Jika seeder belum tersedia, Anda dapat membuat akun secara manual melalui halaman pendaftaran atau menggunakan `php artisan tinker`. Contoh membuat akun melalui Tinker:
+
+```php
+// Jalankan pada terminal: php artisan tinker
+\App\Models\User::create([
+		'name' => 'Admin',
+		'email' => 'admin@pulsa.test',
+		'password' => bcrypt('password123'),
+]);
 ```
 
-Kontak
-- Email: Pulsacs187@gmail.com (link Gmail compose tersedia di antarmuka)
-- WhatsApp: +62 882-2058-8345 (wa.me/6288220588345)
-
-Pengembangan dan debugging
-- Jika menghapus kelas atau file, jalankan `composer dump-autoload` dan bersihkan view cache: `php artisan view:clear`.
-
-Lisensi
-- Tambahkan lisensi proyek bila perlu.
+## Catatan Tambahan
+- Opini dan Suara Pembaca yang dikirim biasanya disimpan dengan status `pending` dan perlu disetujui oleh admin agar muncul di halaman depan.
+- Jika gambar hasil upload tidak terlihat, pastikan `php artisan storage:link` sudah dijalankan dan file tersimpan di `public/storage`.
 
 ---
-Made with care.
+Kelompok 4 — PULSA
+

@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\OpiniController;
-use App\Http\Controllers\Admin\SuaraPembacaController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UserPanelController;
@@ -23,8 +22,6 @@ Route::get('/tentang-kami', [HomeController::class, 'tentang'])->name('tentang')
 
 Route::get('/kirim-opini', [HomeController::class, 'kirimOpini'])->name('kirim-opini');
 Route::post('/kirim-opini', [HomeController::class, 'storeOpini'])->name('kirim-opini.store');
-Route::get('/kirim-suara', [HomeController::class, 'kirimSuara'])->name('kirim-suara');
-Route::post('/kirim-suara', [HomeController::class, 'storeSuara'])->name('kirim-suara.store');
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
@@ -46,9 +43,7 @@ Route::middleware(['auth','ensure.admin'])->prefix('admin')->name('admin.')->gro
     Route::patch('opini/{opini}/approve', [OpiniController::class, 'approve'])->name('opini.approve');
     Route::patch('opini/{opini}/reject', [OpiniController::class, 'reject'])->name('opini.reject');
     
-    Route::resource('suara-pembaca', SuaraPembacaController::class)->only(['index', 'show', 'destroy']);
-    Route::patch('suara-pembaca/{suara_pembaca}/approve', [SuaraPembacaController::class, 'approve'])->name('suara-pembaca.approve');
-    Route::patch('suara-pembaca/{suara_pembaca}/reject', [SuaraPembacaController::class, 'reject'])->name('suara-pembaca.reject');
+    // Suara Pembaca feature removed
     
     Route::resource('team', TeamController::class);
     

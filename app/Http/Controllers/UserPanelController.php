@@ -14,9 +14,9 @@ class UserPanelController extends Controller
     {
         $user = auth()->user();
 
-        // Opini stats and list - filter hanya approved untuk ditampilkan
+        // Opini stats and list - tampilkan semua opini (pending, approved, rejected)
         $opiniQuery = Opini::where('user_id', $user->id);
-        $opinis = $opiniQuery->where('status', 'approved')->latest()->take(10)->get();
+        $opinis = $opiniQuery->latest()->take(10)->get();
         $opiniCounts = [
             'total' => $opiniQuery->count(),
             'approved' => $opiniQuery->where('status', 'approved')->count(),

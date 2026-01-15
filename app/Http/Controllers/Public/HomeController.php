@@ -114,12 +114,12 @@ class HomeController extends Controller
 
         $data['user_id'] = auth()->id() ?? 1;
         
-        // Jika user sudah login, langsung approved. Jika guest, pending
-        $data['status'] = auth()->check() ? 'approved' : 'pending';
+        // Semua opini memerlukan manual approval dari admin
+        $data['status'] = 'pending';
 
         Opini::create($data);
 
-        return redirect()->route('home')->with('success', auth()->check() ? 'Opini Anda berhasil dipublikasikan.' : 'Opini Anda berhasil dikirim dan menunggu persetujuan.');
+        return redirect()->route('home')->with('success', 'Opini Anda berhasil dikirim dan menunggu persetujuan dari admin.');
     }
 
     public function kirimSuara()

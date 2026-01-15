@@ -13,7 +13,7 @@ Fitur utama:
 - Panel pengguna untuk mengirim opini, melihat status, dan mengedit profil
 - Upload foto untuk profil pengguna dan penulis opini
 - Sistem role berbasis (super-admin dan Admin)
-- Auto-approve opini untuk pengguna terautentikasi
+- Opini memerlukan manual approval dari admin/super-admin sebelum dipublikasikan
 
 ## Cara Instalasi (Lokal)
 Persyaratan minimal:
@@ -96,17 +96,17 @@ Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut:
 	- Email: staff@pulsa.id
 	- Password: password
 
-- User biasa: Daftar melalui halaman register atau gunakan:
-	- Email: rain@pulsa.id
+- User biasa: Daftar melalui halaman register
+	- Email: rain@pulsa.id (jika sudah ada)
 	- Password: password
-	- Profesi: RR
 
-**Catatan:** Pengguna baru dapat langsung mengirim opini dan akan langsung diapprove jika sudah terdaftar.
+**Catatan:** Semua opini memerlukan manual approval dari admin atau super-admin sebelum dapat dipublikasikan dan terlihat di halaman depan.
 
 
 ## Catatan Tambahan
-- Opini yang dikirim oleh pengguna terautentikasi langsung disetujui (status: approved) dan muncul di dashboard
-- Opini dari guest dikirim dengan status pending dan menunggu approval dari admin
+- Semua opini (dari pengguna terautentikasi maupun guest) dikirim dengan status pending dan memerlukan manual approval dari admin/super-admin
+- Admin dapat approve atau reject opini melalui panel admin di `/admin/opini`
+- Pengguna dapat melihat status opini mereka di user panel (`/user/panel`) - akan menampilkan lock icon jika belum diapprove
 - Pengguna dapat menambah komentar pada berita detail untuk berpartisipasi lebih lanjut
 - Foto profil yang di-upload harus berformat JPG/PNG dengan ukuran max 2MB
 - Jika gambar hasil upload tidak terlihat, pastikan `php artisan storage:link` sudah dijalankan

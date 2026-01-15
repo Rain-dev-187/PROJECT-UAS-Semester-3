@@ -117,6 +117,17 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-4">
+                                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="penulis_email" class="form-control @error('penulis_email') is-invalid @enderror" 
+                                           value="{{ old('penulis_email') }}" placeholder="Email Anda" required>
+                                    @error('penulis_email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
                                     <label class="form-label">Profesi</label>
                                     <input type="text" name="penulis_profesi" class="form-control @error('penulis_profesi') is-invalid @enderror" 
                                            value="{{ old('penulis_profesi') }}" placeholder="Contoh: Mahasiswa, Guru, dll">
@@ -124,15 +135,14 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="form-label">Foto Profil</label>
-                                <input type="file" name="penulis_foto" class="form-control @error('penulis_foto') is-invalid @enderror" accept="image/*">
-                                <small class="text-muted">Format: JPG, PNG. Maksimal 2MB</small>
-                                @error('penulis_foto')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Foto Profil <span class="text-danger">*</span></label>
+                                    <input type="file" name="penulis_foto" class="form-control @error('penulis_foto') is-invalid @enderror" accept="image/*" required>
+                                    <small class="text-muted">Format: JPG, PNG. Maksimal 2MB</small>
+                                    @error('penulis_foto')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         @endif
                         

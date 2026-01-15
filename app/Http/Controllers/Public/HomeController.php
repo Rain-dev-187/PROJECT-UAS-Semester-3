@@ -82,37 +82,46 @@ class HomeController extends Controller
 
     public function kirimOpini()
     {
-        // Require authentication to submit an opini. Redirect guests to registration.
-        if (! auth()->check()) {
-            return redirect()->route('register');
-        }
-
+        // Allow both authenticated and guest users to submit opini
         return view('public.kirim-opini');
     }
 
     public function storeOpini(Request $request)
     {
-        $request->validate([
+        $isGuest = !auth()->check();
+
+        // Validation rules untuk authenticated user dan guest
+        $rules = [
             'judul' => 'required|max:255',
             'konten' => 'required|min:100',
             'penulis_nama' => 'required|max:100',
             'penulis_profesi' => 'nullable|max:100',
             'penulis_foto' => 'nullable|image|max:2048',
-        ]);
+        ];
 
-        $data = $request->only(['judul', 'konten', 'penulis_nama', 'penulis_profesi']);
-        
-        // Jika user login dan tidak upload foto baru, gunakan foto dari profil user
-        if ($request->hasFile('penulis_foto')) {
-            $data['penulis_foto'] = $request->file('penulis_foto')->store('opini/penulis', 'public');
-        } elseif (auth()->check() && auth()->user()->photo) {
-            $data['penulis_foto'] = auth()->user()->photo;
-        } elseif ($request->filled('penulis_foto')) {
-            // Dari hidden input untuk auth users
-            $data['penulis_foto'] = $request->input('penulis_foto');
+        // Untuk guest, email wajib diisi
+        if ($isGuest) {
+            $rules['penulis_email'] = 'required|email|max:100';
+        } else {
+            $rules['penulis_email'] = 'nullable|email|max:100';
         }
 
-        $data['user_id'] = auth()->id() ?? 1;
+        $request->validate($rules);
+
+        $data = $request->only(['judul', 'konten', 'penulis_nama', 'penulis_profesi', 'penulis_email']);
+        
+        // Handle foto penulis
+        if ($request->hasFile('penulis_foto')) {
+            $data['penulis_foto'] = $request->file('penulis_foto')->store('opini/penulis', 'public');
+        } elseif (!$isGuest && auth()->user()->photo) {
+            // Jika user login dan tidak upload foto baru, gunakan foto dari profil user
+            $data['penulis_foto'] = auth()->user()->photo;
+        }
+
+        // Set user_id hanya jika user terautentikasi
+        if (auth()->check()) {
+            $data['user_id'] = auth()->id();
+        }
         
         // Semua opini memerlukan manual approval dari admin
         $data['status'] = 'pending';

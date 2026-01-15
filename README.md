@@ -3,7 +3,7 @@
 **Kelompok:** Kelompok 4
 - Jilan Jalilah - 20241320039
 - Lulu Aeni Salsabila - 20241320083
-- Ahmad Sahrul - 20241320031
+- Ahmad Sahrul  - 20241320031
 - Adhie Maulana - 20241320015
 - Sona Mardiana - 20241320029
 - Jeri Aries - 20241320007
@@ -17,6 +17,7 @@ Fitur utama:
 - Sistem komentar pada berita detail untuk partisipasi pembaca
 - Panel admin untuk moderasi berita, opini, tim, dan pengguna
 - Panel pengguna untuk mengirim opini, melihat status, dan mengedit profil
+- **Fitur opini tanpa registrasi** - Guest dapat mengirim opini dengan mengisi form lengkap (nama, email, profesi, dan foto penulis)
 - Upload foto untuk profil pengguna dan penulis opini
 - Sistem role berbasis (super-admin dan Admin)
 - Opini memerlukan manual approval dari admin/super-admin sebelum dipublikasikan
@@ -109,6 +110,13 @@ Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut:
 
 
 ## Catatan Tambahan
+- **Pengiriman Opini**: 
+  - Pengguna terautentikasi dapat mengirim opini dengan data otomatis dari profil mereka
+  - Guest (tanpa registrasi) dapat mengirim opini dengan mengisi form lengkap:
+    - Nama lengkap (wajib)
+    - Email (wajib)
+    - Profesi (opsional)
+    - Foto penulis (wajib untuk guest)
 - Semua opini (dari pengguna terautentikasi maupun guest) dikirim dengan status pending dan memerlukan manual approval dari admin/super-admin
 - Admin dapat approve atau reject opini melalui panel admin di `/admin/opini`
 - Pengguna dapat melihat status opini mereka di user panel (`/user/panel`) - akan menampilkan lock icon jika belum diapprove

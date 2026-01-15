@@ -11,7 +11,7 @@ class OpiniController extends Controller
 {
     public function index()
     {
-        $opinis = Opini::with('user')->latest()->paginate(10);
+        $opinis = Opini::with(['user'])->latest()->paginate(10);
         return view('admin.opini.index', compact('opinis'));
     }
 

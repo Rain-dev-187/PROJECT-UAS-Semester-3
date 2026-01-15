@@ -21,6 +21,7 @@ class Opini extends Model
         'konten',
         'gambar',
         'penulis_nama',
+        'penulis_email',
         'penulis_foto',
         'penulis_profesi',
         'user_id',

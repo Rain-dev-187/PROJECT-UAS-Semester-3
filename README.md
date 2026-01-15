@@ -1,7 +1,13 @@
  # PULSA — Publik Suara Aspirasi
 
 **Kelompok:** Kelompok 4
-- Ahmad Sahrul F - 20241320031
+- Jilan Jalilah - 20241320039
+- Lulu Aeni Salsabila - 20241320083
+- Ahmad Sahrul - 20241320031
+- Adhie Maulana - 20241320015
+- Sona Mardiana - 20241320029
+- Jeri Aries - 20241320007
+- Akbar - 20241320017
 
 ## Deskripsi Aplikasi
 PULSA adalah aplikasi web untuk jurnalisme warga dan partisipasi publik. Aplikasi ini memungkinkan masyarakat mengirimkan opini dan berita, sementara tim admin dapat memoderasi konten, mengelola tim, serta mengatur pengguna.
@@ -97,8 +103,7 @@ Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut:
 	- Password: password
 
 - User biasa: Daftar melalui halaman register
-	- Email: rain@pulsa.id (jika sudah ada)
-	- Password: password
+	
 
 **Catatan:** Semua opini memerlukan manual approval dari admin atau super-admin sebelum dapat dipublikasikan dan terlihat di halaman depan.
 

@@ -2,16 +2,18 @@
 
 **Kelompok:** Kelompok 4
 - Ahmad Sahrul F - 20241320031
-- 
 
 ## Deskripsi Aplikasi
-PULSA adalah aplikasi web untuk jurnalisme warga dan partisipasi publik. Aplikasi ini memungkinkan masyarakat mengirimkan opini dan suara pembaca, sementara tim admin dapat memoderasi konten, mengelola tim, serta mengatur pengguna.
+PULSA adalah aplikasi web untuk jurnalisme warga dan partisipasi publik. Aplikasi ini memungkinkan masyarakat mengirimkan opini dan berita, sementara tim admin dapat memoderasi konten, mengelola tim, serta mengatur pengguna.
 
 Fitur utama:
-- Halaman depan (landing page) yang menampilkan berita, opini, dan suara pembaca
-- Panel admin untuk moderasi berita, opini, suara pembaca, tim, dan pengguna
-- Panel pengguna untuk mengirim opini dan suara serta melihat status kiriman
-- Upload gambar untuk penulis/opini dan anggota tim
+- Halaman depan (landing page) yang menampilkan berita, opini terbaru, dan informasi tentang PULSA
+- Sistem komentar pada berita detail untuk partisipasi pembaca
+- Panel admin untuk moderasi berita, opini, tim, dan pengguna
+- Panel pengguna untuk mengirim opini, melihat status, dan mengedit profil
+- Upload foto untuk profil pengguna dan penulis opini
+- Sistem role berbasis (super-admin dan Admin)
+- Auto-approve opini untuk pengguna terautentikasi
 
 ## Cara Instalasi (Lokal)
 Persyaratan minimal:
@@ -84,33 +86,42 @@ Catatan penting:
 - Jika aset CSS/JS tidak muncul, jalankan `npm run dev` lalu refresh browser.
 
 ## Akun Dummy (untuk testing)
-Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut (atau buat lewat seeder/register):
+Jika Anda membutuhkan akun untuk pengujian, gunakan akun berikut:
 
-- Admin (super-admin / staff):
-	- Email: admin@pulsa.test
-	- Password: password123
+- Super Admin (Full Access):
+	- Email: admin@pulsa.id
+	- Password: password
 
-- Staff:
-	- Email: staff@pulsa.test
-	- Password: password123
+- Admin (Limited Access - Manage berita, opini, tim):
+	- Email: staff@pulsa.id
+	- Password: password
 
-- User biasa: Daftar Manual
-	
+- User biasa: Daftar melalui halaman register atau gunakan:
+	- Email: rain@pulsa.id
+	- Password: password
+	- Profesi: RR
 
-Jika seeder belum tersedia, Anda dapat membuat akun secara manual melalui halaman pendaftaran atau menggunakan `php artisan tinker`. Contoh membuat akun melalui Tinker:
+**Catatan:** Pengguna baru dapat langsung mengirim opini dan akan langsung diapprove jika sudah terdaftar.
 
-```php
-// Jalankan pada terminal: php artisan tinker
-\App\Models\User::create([
-		'name' => 'Admin',
-		'email' => 'admin@pulsa.test',
-		'password' => bcrypt('password123'),
-]);
-```
 
 ## Catatan Tambahan
-- Opini dan Suara Pembaca yang dikirim biasanya disimpan dengan status `pending` dan perlu disetujui oleh admin agar muncul di halaman depan.
-- Jika gambar hasil upload tidak terlihat, pastikan `php artisan storage:link` sudah dijalankan dan file tersimpan di `public/storage`.
+- Opini yang dikirim oleh pengguna terautentikasi langsung disetujui (status: approved) dan muncul di dashboard
+- Opini dari guest dikirim dengan status pending dan menunggu approval dari admin
+- Pengguna dapat menambah komentar pada berita detail untuk berpartisipasi lebih lanjut
+- Foto profil yang di-upload harus berformat JPG/PNG dengan ukuran max 2MB
+- Jika gambar hasil upload tidak terlihat, pastikan `php artisan storage:link` sudah dijalankan
+- Admin panel dapat diakses di `/admin` dengan role super-admin atau Admin
+- User panel dapat diakses di `/user/panel` untuk melihat opini yang telah dikirim
+
+## Teknologi yang Digunakan
+- Laravel 10.50.0 - Backend framework
+- PHP 8.2.12 - Language runtime
+- MySQL - Database
+- Bootstrap 5.3.2 - Frontend framework
+- Font Awesome 6 - Icon library
+- Spatie Permission - Role & permission management
+- Blade Template Engine - Server-side templating
+
 
 ---
 Kelompok 4 — PULSA

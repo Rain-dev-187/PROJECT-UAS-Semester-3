@@ -126,3 +126,4 @@ class UserPanelController extends Controller
 
         return redirect()->route('user.panel')->with('success', 'Opini berhasil diperbarui dan menunggu persetujuan admin.');
     }
+}

@@ -24,15 +24,15 @@ class RolePermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // Create roles: super-admin (full), staff (limited), user/public (read-only)
+        // Create roles: super-admin (full), Admin (limited), user/public (read-only)
         $superAdmin = Role::firstOrCreate(['name' => 'super-admin']);
-        $staffRole = Role::firstOrCreate(['name' => 'staff']);
+        $adminRole = Role::firstOrCreate(['name' => 'Admin']);
         $userRole = Role::firstOrCreate(['name' => 'user']);
 
         // Assign permissions
         $superAdmin->givePermissionTo($permissions);
-        // Staff can manage berita, opini, suara, and team but NOT users
-        $staffRole->givePermissionTo(['manage berita', 'manage opini', 'manage suara', 'manage team']);
+        // Admin can manage berita, opini, suara, and team but NOT users
+        $adminRole->givePermissionTo(['manage berita', 'manage opini', 'manage suara', 'manage team']);
         // Guest gets no admin permissions (read-only on public site)
     }
 }

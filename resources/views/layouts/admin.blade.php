@@ -56,7 +56,12 @@
                         </li>
                     @endif
                     <li class="nav-item d-flex align-items-center">
-                        <span class="text-muted small">{{ auth()->user()->email ?? '' }}</span>
+                        <div class="d-flex flex-column">
+                            <span class="text-muted small">{{ auth()->user()->email ?? '' }}</span>
+                            @if(auth()->user()->nickname)
+                                <span class="text-muted small"><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</span>
+                            @endif
+                        </div>
                     </li>
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
@@ -82,7 +87,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         @php
-                            $isAdminUser = auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','staff']);
+                            $isAdminUser = auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','Admin']);
                         @endphp
 
                         @if($isAdminUser)

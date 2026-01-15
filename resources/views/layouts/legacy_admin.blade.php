@@ -41,7 +41,7 @@
             <div class="brand">PULSA <small class="d-block text-muted" style="font-weight:400">@yield('panel_label', 'Admin Panel')</small></div>
             <nav class="nav flex-column p-3">
                 @php
-                    $isAdminUser = auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','staff']);
+                    $isAdminUser = auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','Admin']);
                 @endphp
 
                 @if($isAdminUser)
@@ -77,7 +77,12 @@
                             <img src="{{ $url }}" alt="avatar" style="height:36px;width:36px;object-fit:cover;border-radius:6px;margin-right:10px;">
                         @endif
                     @endif
-                    <div class="me-3 text-muted small">{{ auth()->user()->email ?? '' }}</div>
+                    <div class="me-3 text-muted small">
+                        <div>{{ auth()->user()->email ?? '' }}</div>
+                        @if(auth()->user()->nickname)
+                            <div><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</div>
+                        @endif
+                    </div>
                 </div>
             </header>
 

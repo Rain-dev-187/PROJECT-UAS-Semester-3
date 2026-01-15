@@ -71,7 +71,7 @@
     
     .share-buttons a:hover { transform: translateY(-3px); }
     .share-buttons .facebook { background: #3b5998; }
-    .share-buttons .twitter { background: #1da1f2; }
+    .share-buttons .x-twitter { background: #000; }
     .share-buttons .whatsapp { background: #25d366; }
 </style>
 @endpush
@@ -109,7 +109,7 @@
                             <strong>Bagikan:</strong>
                             <div class="share-buttons d-inline ms-2">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $opini->judul }}" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $opini->judul }}" target="_blank" class="x-twitter"><i class="fab fa-x-twitter"></i></a>
                                 <a href="https://wa.me/?text={{ $opini->judul }} {{ url()->current() }}" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
                             </div>
                         </div>

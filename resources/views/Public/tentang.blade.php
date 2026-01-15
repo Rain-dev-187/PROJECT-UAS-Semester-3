@@ -26,7 +26,7 @@
     }
     
     .about-card p {
-        color: #555;
+        color: #000;
         line-height: 1.8;
     }
     

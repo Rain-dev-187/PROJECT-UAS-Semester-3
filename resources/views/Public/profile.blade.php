@@ -9,6 +9,17 @@
             <div class="form-card">
                 <h5 class="mb-4"><i class="fas fa-user-edit me-2 text-primary"></i>Edit Profile</h5>
 
+                @if($errors->any())
+                    <div class="alert alert-danger mb-3">
+                        <h6>Ada kesalahan:</h6>
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -19,8 +30,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Nickname</label>
-                        <input type="text" name="nickname" class="form-control" value="{{ old('nickname', auth()->user()->nickname) }}">
+                        <label class="form-label">Profesi</label>
+                        <input type="text" name="nickname" class="form-control" value="{{ old('nickname', auth()->user()->nickname) }}" placeholder="Contoh: Mahasiswa, Guru, dll">
                     </div>
 
                     <div class="mb-3">
@@ -34,7 +45,11 @@
                         @if(! empty($url))
                             <div class="mb-2"><img src="{{ $url }}" style="height:80px;border-radius:8px"></div>
                         @endif
-                        <input type="file" name="photo" accept="image/*" class="form-control">
+                        <input type="file" name="photo" accept="image/*" class="form-control @error('photo') is-invalid @enderror">
+                        @error('photo')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        <small class="text-muted d-block mt-1">Format: JPG, PNG. Max: 2MB</small>
                     </div>
 
                     <hr>
@@ -52,7 +67,7 @@
                     <div class="d-flex gap-2">
                         <button class="btn btn-primary-custom" type="submit">Simpan</button>
                         @php
-                            $backRoute = (auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','staff'])) ? route('admin.dashboard') : route('user.panel');
+                            $backRoute = (auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','Admin'])) ? route('admin.dashboard') : route('user.panel');
                         @endphp
                         <a href="{{ $backRoute }}" class="btn btn-outline-secondary">Batal</a>
                     </div>

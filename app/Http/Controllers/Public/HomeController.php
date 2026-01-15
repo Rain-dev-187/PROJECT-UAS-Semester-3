@@ -102,16 +102,24 @@ class HomeController extends Controller
 
         $data = $request->only(['judul', 'konten', 'penulis_nama', 'penulis_profesi']);
         
+        // Jika user login dan tidak upload foto baru, gunakan foto dari profil user
         if ($request->hasFile('penulis_foto')) {
             $data['penulis_foto'] = $request->file('penulis_foto')->store('opini/penulis', 'public');
+        } elseif (auth()->check() && auth()->user()->photo) {
+            $data['penulis_foto'] = auth()->user()->photo;
+        } elseif ($request->filled('penulis_foto')) {
+            // Dari hidden input untuk auth users
+            $data['penulis_foto'] = $request->input('penulis_foto');
         }
 
         $data['user_id'] = auth()->id() ?? 1;
-        $data['status'] = 'pending';
+        
+        // Jika user sudah login, langsung approved. Jika guest, pending
+        $data['status'] = auth()->check() ? 'approved' : 'pending';
 
         Opini::create($data);
 
-        return redirect()->route('home')->with('success', 'Opini Anda berhasil dikirim dan menunggu persetujuan.');
+        return redirect()->route('home')->with('success', auth()->check() ? 'Opini Anda berhasil dipublikasikan.' : 'Opini Anda berhasil dikirim dan menunggu persetujuan.');
     }
 
     public function kirimSuara()

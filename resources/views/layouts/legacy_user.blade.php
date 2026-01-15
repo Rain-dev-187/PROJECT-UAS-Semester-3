@@ -92,7 +92,12 @@
                             <img src="{{ $url }}" alt="avatar" style="height:36px;width:36px;object-fit:cover;border-radius:6px;margin-right:10px;">
                         @endif
                     @endif
-                    <div class="me-3 text-muted small">{{ auth()->user()->email ?? '' }}</div>
+                    <div class="me-3 text-muted small">
+                        <div>{{ auth()->user()->email ?? '' }}</div>
+                        @if(auth()->user()->nickname)
+                            <div><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</div>
+                        @endif
+                    </div>
                 </div>
             </header>
 

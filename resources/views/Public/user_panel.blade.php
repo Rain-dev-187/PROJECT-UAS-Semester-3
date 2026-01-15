@@ -102,7 +102,7 @@
                                 <h4 class="mb-1 fw-bold">{{ $user->name }}</h4>
                                 <p class="mb-0 text-muted">{{ $user->email }}</p>
                                 @if($user->nickname)
-                                    <p class="mb-0 text-muted small">{{ $user->nickname }}</p>
+                                    <p class="mb-0 text-muted small"><i class="fas fa-briefcase me-1"></i>{{ $user->nickname }}</p>
                                 @endif
                             </div>
                         </div>
@@ -177,11 +177,7 @@
                                     </td>
                                     <td class="text-muted small">{{ $op->created_at->format('d/m/Y') }}</td>
                                     <td class="text-end pe-4">
-                                         @if($op->status === 'approved' && ! empty($op->slug))
-                                            <a href="{{ route('opini.show', $op->slug) }}" class="btn btn-sm btn-light text-primary"><i class="fas fa-eye"></i></a>
-                                        @else
-                                            <a href="{{ route('opini.showById', $op->id) }}" class="btn btn-sm btn-light text-secondary"><i class="fas fa-eye"></i></a>
-                                        @endif
+                                        <a href="{{ route('opini.show', $op->slug) }}" class="btn btn-sm btn-light text-primary"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @empty

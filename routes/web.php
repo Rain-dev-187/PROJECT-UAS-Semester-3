@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\CommentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\UserPanelController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [HomeController::class, 'berita'])->name('berita.index');
 Route::get('/berita/{slug}', [HomeController::class, 'showBerita'])->name('berita.show');
+Route::post('/berita/{slug}/comments', [CommentController::class, 'store'])->name('berita.comments.store');
 Route::get('/opini', [HomeController::class, 'opini'])->name('opini.index');
 Route::get('/opini/{slug}', [HomeController::class, 'showOpini'])->name('opini.show');
 Route::get('/opini/id/{id}', [HomeController::class, 'showOpiniById'])->name('opini.showById');

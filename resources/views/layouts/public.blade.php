@@ -170,12 +170,12 @@
         /* Make the landing page 'Tentang Kami' section match the navbar gradient */
         .team-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff;
+            color: #000;
             padding: 60px 0;
         }
 
         .team-section .section-title {
-            color: #fff;
+            color: #000;
         }
 
         .team-section .team-card {

@@ -31,16 +31,16 @@ class UserSeeder extends Seeder
 
         // Check if the staff user already exists
         if (!User::where('email', 'staff@pulsa.id')->exists()) {
-            // Create Staff user
+            // Create Admin user
             $staff = User::create([
                 'name' => 'Staff User',
                 'email' => 'staff@pulsa.id',
                 'password' => Hash::make('password'), // Hash the password
             ]);
             if (method_exists($staff, 'assignRole')) {
-                $staff->assignRole('staff');
+                $staff->assignRole('admin');
             } else {
-                $role = Role::firstWhere('name', 'staff');
+                $role = Role::firstWhere('name', 'admin');
                 if ($role) {
                     $staff->roles()->attach($role->id);
                 }

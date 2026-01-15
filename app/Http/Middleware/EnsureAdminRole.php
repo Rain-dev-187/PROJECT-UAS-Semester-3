@@ -19,7 +19,7 @@ class EnsureAdminRole
             return redirect()->route('login');
         }
 
-        if (method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['super-admin', 'staff'])) {
+        if (method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['super-admin', 'Admin'])) {
             return $next($request);
         }
 

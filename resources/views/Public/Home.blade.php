@@ -348,7 +348,7 @@
     <section class="team-section" id="tentang">
         <div class="container">
             <h3 class="section-title">Tentang Kami</h3>
-            <p class="mb-5 text-muted" style="max-width: 800px;">
+            <p class="mb-5" style="max-width: 800px; color: #000;">
                 Publik Suara Aspirasi (PULSA) merupakan media digital aspirasi dan jurnalisme warga yang dikembangkan sebagai wadah 
                 partisipasi publik dalam menyampaikan pendapat dan gagasan.
             </p>

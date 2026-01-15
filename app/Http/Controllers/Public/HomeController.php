@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use App\Models\Opini;
-use App\Models\SuaraPembaca;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -16,14 +15,12 @@ class HomeController extends Controller
         $headlines = Berita::published()->headline()->latest()->take(5)->get();
         $beritas = Berita::published()->latest()->take(6)->get();
         $opinis = Opini::approved()->latest()->take(3)->get();
-        $suaraPembacas = SuaraPembaca::approved()->latest()->take(4)->get();
         $teams = Team::active()->get();
 
         return view('public.home', compact(
             'headlines',
             'beritas',
             'opinis',
-            'suaraPembacas',
             'teams'
         ));
     }
@@ -85,6 +82,11 @@ class HomeController extends Controller
 
     public function kirimOpini()
     {
+        // Require authentication to submit an opini. Redirect guests to registration.
+        if (! auth()->check()) {
+            return redirect()->route('register');
+        }
+
         return view('public.kirim-opini');
     }
 
@@ -100,41 +102,33 @@ class HomeController extends Controller
 
         $data = $request->only(['judul', 'konten', 'penulis_nama', 'penulis_profesi']);
         
+        // Jika user login dan tidak upload foto baru, gunakan foto dari profil user
         if ($request->hasFile('penulis_foto')) {
             $data['penulis_foto'] = $request->file('penulis_foto')->store('opini/penulis', 'public');
+        } elseif (auth()->check() && auth()->user()->photo) {
+            $data['penulis_foto'] = auth()->user()->photo;
+        } elseif ($request->filled('penulis_foto')) {
+            // Dari hidden input untuk auth users
+            $data['penulis_foto'] = $request->input('penulis_foto');
         }
 
         $data['user_id'] = auth()->id() ?? 1;
-        $data['status'] = 'pending';
+        
+        // Jika user sudah login, langsung approved. Jika guest, pending
+        $data['status'] = auth()->check() ? 'approved' : 'pending';
 
         Opini::create($data);
 
-        return redirect()->route('home')->with('success', 'Opini Anda berhasil dikirim dan menunggu persetujuan.');
+        return redirect()->route('home')->with('success', auth()->check() ? 'Opini Anda berhasil dipublikasikan.' : 'Opini Anda berhasil dikirim dan menunggu persetujuan.');
     }
 
     public function kirimSuara()
     {
-        return view('public.kirim-suara');
+        abort(404);
     }
 
     public function storeSuara(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|max:100',
-            'email' => 'required|email|max:100',
-            'profesi' => 'nullable|max:100',
-            'pesan' => 'required|min:20|max:500',
-            'foto' => 'nullable|image|max:2048',
-        ]);
-
-        $data = $request->only(['nama', 'email', 'profesi', 'pesan']);
-        
-        if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('suara-pembaca', 'public');
-        }
-
-        SuaraPembaca::create($data);
-
-        return redirect()->route('home')->with('success', 'Suara Anda berhasil dikirim dan menunggu persetujuan.');
+        abort(404);
     }
 }

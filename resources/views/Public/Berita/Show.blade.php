@@ -70,7 +70,7 @@
     
     .share-buttons a:hover { transform: translateY(-3px); }
     .share-buttons .facebook { background: #3b5998; }
-    .share-buttons .twitter { background: #1da1f2; }
+    .share-buttons .x-twitter { background: #000; }
     .share-buttons .whatsapp { background: #25d366; }
     
     .related-card {
@@ -95,6 +95,55 @@
     .related-card .card-body { padding: 15px; }
     .related-card h6 a { color: var(--dark); text-decoration: none; }
     .related-card h6 a:hover { color: var(--primary); }
+
+    .comments-section {
+        margin-top: 40px;
+        padding-top: 40px;
+        border-top: 2px solid #eee;
+    }
+
+    .comment-item {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 10px;
+    }
+
+    .comment-author {
+        font-weight: 600;
+        color: var(--dark);
+    }
+
+    .comment-date {
+        font-size: 0.85rem;
+        color: #999;
+    }
+
+    .comment-content {
+        color: #555;
+        line-height: 1.6;
+        white-space: pre-line;
+    }
+
+    .comment-form-section {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    .comment-form-section h5 {
+        margin-bottom: 20px;
+        color: var(--dark);
+    }
+
 </style>
 @endpush
 
@@ -130,13 +179,91 @@
                             <strong class="me-3">Bagikan:</strong>
                             <div class="share-buttons d-inline">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                                <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $berita->judul }}" target="_blank" class="twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $berita->judul }}" target="_blank" class="x-twitter"><i class="fab fa-x-twitter"></i></a>
                                 <a href="https://wa.me/?text={{ $berita->judul }} {{ url()->current() }}" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
                             </div>
                         </div>
                         <a href="{{ route('berita.index') }}" class="btn btn-outline-secondary">
                             <i class="fas fa-arrow-left me-2"></i>Kembali
                         </a>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <h4 class="mb-4"><i class="fas fa-comments me-2 text-primary"></i>Komentar ({{ $berita->comments()->approved()->count() }})</h4>
+
+                        <!-- Comments Form -->
+                        <div class="comment-form-section">
+                            @if($errors->any())
+                                <div class="alert alert-danger mb-3">
+                                    <ul class="mb-0">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            @if(session('success'))
+                                <div class="alert alert-success mb-3">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            <h5><i class="fas fa-pencil-alt me-2"></i>Tambah Komentar</h5>
+                            <form action="{{ route('berita.comments.store', $berita->slug) }}" method="POST">
+                                @csrf
+                                @if(!auth()->check())
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Nama <span class="text-danger">*</span></label>
+                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                                            @error('name')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
+                                            @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <div class="mb-3">
+                                    <label class="form-label">Komentar <span class="text-danger">*</span></label>
+                                    <textarea name="content" rows="5" class="form-control @error('content') is-invalid @enderror" placeholder="Tulis komentar Anda di sini..." required>{{ old('content') }}</textarea>
+                                    @error('content')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary-custom">
+                                    <i class="fas fa-paper-plane me-2"></i>Kirim Komentar
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Comments List -->
+                        @forelse($berita->comments()->approved()->latest()->get() as $comment)
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <div>
+                                        <div class="comment-author">{{ $comment->name ?? $comment->user?->name }}</div>
+                                        <div class="comment-date">{{ $comment->created_at->diffForHumans() }}</div>
+                                    </div>
+                                </div>
+                                <div class="comment-content">
+                                    {{ $comment->content }}
+                                </div>
+                            </div>
+                        @empty
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>Belum ada komentar. Jadilah yang pertama berkomentar!
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>

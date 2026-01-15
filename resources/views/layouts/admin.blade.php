@@ -56,7 +56,12 @@
                         </li>
                     @endif
                     <li class="nav-item d-flex align-items-center">
-                        <span class="text-muted small">{{ auth()->user()->email ?? '' }}</span>
+                        <div class="d-flex flex-column">
+                            <span class="text-muted small">{{ auth()->user()->email ?? '' }}</span>
+                            @if(auth()->user()->nickname)
+                                <span class="text-muted small"><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</span>
+                            @endif
+                        </div>
                     </li>
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
@@ -82,7 +87,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         @php
-                            $isAdminUser = auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','staff']);
+                            $isAdminUser = auth()->check() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','Admin']);
                         @endphp
 
                         @if($isAdminUser)
@@ -104,12 +109,7 @@
                                     <p>Opini</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.suara-pembaca.index') }}" class="nav-link {{ request()->is('admin/suara-pembaca*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-bullhorn"></i>
-                                    <p>Suara Pembaca</p>
-                                </a>
-                            </li>
+                            <!-- Suara Pembaca removed -->
                             <li class="nav-item">
                                 <a href="{{ route('admin.team.index') }}" class="nav-link {{ request()->is('admin/team*') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-users"></i>
@@ -137,12 +137,7 @@
                                     <p>Kirim Opini</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('kirim-suara') }}" class="nav-link {{ request()->is('kirim-suara*') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-bullhorn"></i>
-                                    <p>Kirim Suara</p>
-                                </a>
-                            </li>
+                            <!-- Kirim Suara removed -->
                             <li class="nav-item">
                                 <a href="{{ route('home') }}" class="nav-link">
                                     <i class="nav-icon fas fa-globe"></i>
@@ -202,7 +197,6 @@
         <!-- Main Footer -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-inline">
-                Anything you want
             </div>
             <strong>Copyright &copy; {{ date('Y') }} <a href="#">PULSA</a>.</strong> All rights reserved.
         </footer>

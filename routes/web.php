@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Public\CommentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\OpiniController;
-use App\Http\Controllers\Admin\SuaraPembacaController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UserPanelController;
@@ -16,6 +16,7 @@ use App\Http\Controllers\UserPanelController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [HomeController::class, 'berita'])->name('berita.index');
 Route::get('/berita/{slug}', [HomeController::class, 'showBerita'])->name('berita.show');
+Route::post('/berita/{slug}/comments', [CommentController::class, 'store'])->name('berita.comments.store');
 Route::get('/opini', [HomeController::class, 'opini'])->name('opini.index');
 Route::get('/opini/{slug}', [HomeController::class, 'showOpini'])->name('opini.show');
 Route::get('/opini/id/{id}', [HomeController::class, 'showOpiniById'])->name('opini.showById');
@@ -23,8 +24,6 @@ Route::get('/tentang-kami', [HomeController::class, 'tentang'])->name('tentang')
 
 Route::get('/kirim-opini', [HomeController::class, 'kirimOpini'])->name('kirim-opini');
 Route::post('/kirim-opini', [HomeController::class, 'storeOpini'])->name('kirim-opini.store');
-Route::get('/kirim-suara', [HomeController::class, 'kirimSuara'])->name('kirim-suara');
-Route::post('/kirim-suara', [HomeController::class, 'storeSuara'])->name('kirim-suara.store');
 
 // Auth Routes
 Route::middleware('guest')->group(function () {
@@ -46,9 +45,7 @@ Route::middleware(['auth','ensure.admin'])->prefix('admin')->name('admin.')->gro
     Route::patch('opini/{opini}/approve', [OpiniController::class, 'approve'])->name('opini.approve');
     Route::patch('opini/{opini}/reject', [OpiniController::class, 'reject'])->name('opini.reject');
     
-    Route::resource('suara-pembaca', SuaraPembacaController::class)->only(['index', 'show', 'destroy']);
-    Route::patch('suara-pembaca/{suara_pembaca}/approve', [SuaraPembacaController::class, 'approve'])->name('suara-pembaca.approve');
-    Route::patch('suara-pembaca/{suara_pembaca}/reject', [SuaraPembacaController::class, 'reject'])->name('suara-pembaca.reject');
+    // Suara Pembaca feature removed
     
     Route::resource('team', TeamController::class);
     

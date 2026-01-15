@@ -27,6 +27,10 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
     
+    .berita-card a img:hover {
+        transform: scale(1.05);
+    }
+
     .berita-card img {
         width: 100%;
         height: 200px;
@@ -82,8 +86,10 @@
             @forelse($beritas as $berita)
                 <div class="col-md-6 col-lg-4">
                     <div class="berita-card">
+                        <a href="{{ route('berita.show', $berita->slug) }}" style="display: block; overflow: hidden; height: 200px;">
                             <img src="{{ $berita->gambar ? Storage::url($berita->gambar) : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=200&fit=crop' }}" 
-                             alt="{{ $berita->judul }}">
+                             alt="{{ $berita->judul }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; cursor: pointer;">
+                        </a>
                         <div class="card-body">
                             <span class="kategori">{{ ucfirst($berita->kategori) }}</span>
                             <h5><a href="{{ route('berita.show', $berita->slug) }}">{{ Str::limit($berita->judul, 60) }}</a></h5>

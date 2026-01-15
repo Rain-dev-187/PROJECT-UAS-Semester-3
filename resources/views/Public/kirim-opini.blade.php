@@ -81,33 +81,60 @@
                         <hr class="my-4">
                         <h6 class="mb-3">Informasi Penulis</h6>
                         
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                                <input type="text" name="penulis_nama" class="form-control @error('penulis_nama') is-invalid @enderror" 
-                                       value="{{ old('penulis_nama') }}" placeholder="Nama Anda" required>
-                                @error('penulis_nama')
+                        @if(auth()->check())
+                            <!-- Auto-filled from user profile -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
+                                    <input type="hidden" name="penulis_nama" value="{{ auth()->user()->name }}">
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Profesi</label>
+                                    <input type="text" class="form-control" value="{{ auth()->user()->nickname ?? '-' }}" disabled>
+                                    <input type="hidden" name="penulis_profesi" value="{{ auth()->user()->nickname }}">
+                                </div>
+                            </div>
+                            @if(auth()->user()->photo)
+                                <div class="mb-4">
+                                    <label class="form-label">Foto Profil</label>
+                                    <div>
+                                        <img src="{{ Storage::url(auth()->user()->photo) }}" alt="Foto Profil" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px;">
+                                    </div>
+                                    <input type="hidden" name="penulis_foto" value="{{ auth()->user()->photo }}">
+                                </div>
+                            @endif
+                            <small class="text-muted d-block mb-4"><i class="fas fa-info-circle me-2"></i>Data diambil dari profil akun Anda. Untuk mengubah, kunjungi halaman edit profil.</small>
+                        @else
+                            <!-- Manual input for guests -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                                    <input type="text" name="penulis_nama" class="form-control @error('penulis_nama') is-invalid @enderror" 
+                                           value="{{ old('penulis_nama') }}" placeholder="Nama Anda" required>
+                                    @error('penulis_nama')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Profesi</label>
+                                    <input type="text" name="penulis_profesi" class="form-control @error('penulis_profesi') is-invalid @enderror" 
+                                           value="{{ old('penulis_profesi') }}" placeholder="Contoh: Mahasiswa, Guru, dll">
+                                    @error('penulis_profesi')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label">Foto Profil</label>
+                                <input type="file" name="penulis_foto" class="form-control @error('penulis_foto') is-invalid @enderror" accept="image/*">
+                                <small class="text-muted">Format: JPG, PNG. Maksimal 2MB</small>
+                                @error('penulis_foto')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <label class="form-label">Profesi</label>
-                                <input type="text" name="penulis_profesi" class="form-control @error('penulis_profesi') is-invalid @enderror" 
-                                       value="{{ old('penulis_profesi') }}" placeholder="Contoh: Mahasiswa, Guru, dll">
-                                @error('penulis_profesi')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label class="form-label">Foto Profil</label>
-                            <input type="file" name="penulis_foto" class="form-control @error('penulis_foto') is-invalid @enderror" accept="image/*">
-                            <small class="text-muted">Format: JPG, PNG. Maksimal 2MB</small>
-                            @error('penulis_foto')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @endif
                         
                         <div class="d-flex gap-3">
                             <button type="submit" class="btn btn-primary-custom">

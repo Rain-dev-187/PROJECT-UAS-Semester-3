@@ -70,8 +70,8 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            // Redirect based on role: admins/staff -> admin dashboard, others -> user panel
-            if (method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['super-admin', 'staff'])) {
+            // Redirect based on role: super-admin/Admin -> admin dashboard, others -> user panel
+            if (method_exists($user, 'hasAnyRole') && $user->hasAnyRole(['super-admin', 'Admin'])) {
                 return redirect()->intended(route('admin.dashboard'));
             }
 

@@ -1,19 +1,71 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
+ya
+# =============================
+# Laravel / PHP Standard .gitignore
+# =============================
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment files
+/.env
+/.env.*
+!.env.example
+
+# Sensitive storage keys
 /storage/*.key
-/vendor
-.env
+
+# Logs & runtime files
+/storage/logs/*
+!/storage/logs/.gitignore
+/storage/debugbar/*
+
+# Framework generated files (cache, sessions, views)
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+!/storage/framework/.gitignore
+
+# Public storage (symlink)
+/public/storage
+
+# Build artifacts
+/public/hot
+/public/build
+
+# Bootstrap cache (compiled) - ignore compiled files but keep folder
+/bootstrap/cache/*.php
+
+# Composer PHAR
+/composer.phar
+
+# PHPUnit cache
+/.phpunit.result.cache
+
+# Vite / tooling
+/node_modules/.vite
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs from package managers
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDE / Editor
+/.idea/
+/.vscode/
+.phpstorm.meta.php
+
+# Optional files you might not want to commit
+.env.testing
 .env.backup
-.env.production
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
-npm-debug.log
-yarn-error.log
-/.fleet
-/.idea
-/.vscode
+
+# Misc
+.sass-cache/
+.cache/
+.parcel-cache/
+.nyc_output/

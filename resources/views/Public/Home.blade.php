@@ -266,15 +266,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-4">
-                    <a href="{{ route('kirim-suara') }}" class="feature-link">
-                        <div class="feature-card">
-                            <div class="icon"><i class="fas fa-bullhorn"></i></div>
-                            <h5>Suara Pembaca</h5>
-                            <p>Media penyampaian aspirasi, kritik, saran, dan keluhan dari masyarakat.</p>
-                        </div>
-                    </a>
-                </div>
+                <!-- Suara Pembaca feature removed -->
                 <div class="col-md-4">
                     <a href="{{ route('tentang') }}" class="feature-link">
                         <div class="feature-card">
@@ -295,7 +287,7 @@
 </style>
 @endpush
 
-    <!-- Opini & Suara Pembaca -->
+    <!-- Opini Publik -->
     <section class="section-padding bg-light">
         <div class="container">
             <div class="row">
@@ -347,57 +339,7 @@
                     </a>
                 </div>
                 
-                <!-- Suara Pembaca -->
-                <div class="col-lg-6">
-                    <h3 class="section-title">Suara Pembaca</h3>
-                    
-                    @if($suaraPembacas->isNotEmpty())
-                        @if($suaraPembacas->count() > 1)
-                            <div id="suaraCarouselHome" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-                                <div class="carousel-inner">
-                                    @foreach($suaraPembacas as $i => $suara)
-                                        <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
-                                            <div class="mb-4">
-                                                <div class="speech-bubble">
-                                                    <p>"{{ Str::limit($suara->pesan, 200) }}"</p>
-                                                    <span class="author">- {{ $suara->nama }} ({{ $suara->profesi ?? 'Pembaca' }})</span>
-                                                </div>
-                                                <div class="reader-info">
-                                                    <img src="{{ $suara->foto ? Storage::url($suara->foto) : ('https://ui-avatars.com/api/?name='.urlencode($suara->nama).'&background=ee6c4d&color=fff') }}" alt="{{ $suara->nama }}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#suaraCarouselHome" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#suaraCarouselHome" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        @else
-                            @php $suara = $suaraPembacas->first(); @endphp
-                            <div class="mb-4">
-                                <div class="speech-bubble">
-                                    <p>"{{ Str::limit($suara->pesan, 200) }}"</p>
-                                    <span class="author">- {{ $suara->nama }} ({{ $suara->profesi ?? 'Pembaca' }})</span>
-                                </div>
-                                <div class="reader-info">
-                                      <img src="{{ $suara->foto ? Storage::url($suara->foto) : ('https://ui-avatars.com/api/?name='.urlencode($suara->nama).'&background=ee6c4d&color=fff') }}" alt="{{ $suara->nama }}">
-                                </div>
-                            </div>
-                        @endif
-                    @else
-                        <p class="text-muted">Belum ada suara pembaca.</p>
-                    @endif
-                    
-                    <a href="{{ route('kirim-suara') }}" class="btn btn-accent mt-3">
-                        <i class="fas fa-plus me-2"></i>Kirim Suara Anda
-                    </a>
-                </div>
+                <!-- Suara Pembaca section removed -->
             </div>
         </div>
     </section>
@@ -406,7 +348,7 @@
     <section class="team-section" id="tentang">
         <div class="container">
             <h3 class="section-title">Tentang Kami</h3>
-            <p class="mb-5 text-muted" style="max-width: 800px;">
+            <p class="mb-5" style="max-width: 800px; color: #000;">
                 Publik Suara Aspirasi (PULSA) merupakan media digital aspirasi dan jurnalisme warga yang dikembangkan sebagai wadah 
                 partisipasi publik dalam menyampaikan pendapat dan gagasan.
             </p>
@@ -437,9 +379,9 @@
                             Apabila pengguna mengalami kendala atau membutuhkan informasi lebih lanjut terkait website 
                             Publik Suara Aspirasi (PULSA), silakan menghubungi tim pengelola melalui kontak yang tersedia.
                         </p>
-                        <p class="mb-2"><i class="fas fa-envelope me-2"></i> Email: pulsa@email.com</p>
-                        <p class="mb-2"><i class="fab fa-whatsapp me-2"></i> WhatsApp: 08123456789</p>
-                        <p class="mb-0"><i class="fab fa-instagram me-2"></i> Instagram: @pulsa.id</p>
+                        <p class="mb-2"><i class="fas fa-envelope me-2"></i> Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pulsacs187@gmail.com" target="_blank" rel="noopener">Pulsacs187@gmail.com</a></p>
+                        <p class="mb-2"><i class="fab fa-whatsapp me-2"></i> WhatsApp: <a href="https://wa.me/6288220588345" target="_blank" rel="noopener">088220588345</a></p>
+                        <p class="mb-0"><i class="fab fa-instagram me-2"></i> Instagram: <a href="https://instagram.com/pulsa.id" target="_blank" rel="noopener">@pulsa.id</a></p>
                     </div>
                 </div>
             </div>

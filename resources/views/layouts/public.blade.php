@@ -170,12 +170,12 @@
         /* Make the landing page 'Tentang Kami' section match the navbar gradient */
         .team-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff;
+            color: #000;
             padding: 60px 0;
         }
 
         .team-section .section-title {
-            color: #fff;
+            color: #000;
         }
 
         .team-section .team-card {
@@ -305,11 +305,11 @@
                     </ul>
                 </div>
                 <div class="col-lg-4 mb-4">
-                    <h6 class="text-white mb-3">Hubungi Kami</h6>
+                    <h6 class="text-white mb-3"><a href="{{ route('tentang') }}" class="text-white text-decoration-none">Hubungi Kami</a></h6>
                     <ul class="list-unstyled text-white-50">
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> pulsa@email.com</li>
-                        <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> 08123456789</li>
-                        <li class="mb-2"><i class="fab fa-instagram me-2"></i> @pulsa.id</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pulsacs187@gmail.com" target="_blank" rel="noopener" class="text-white-50">Pulsacs187@gmail.com</a></li>
+                        <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> <a href="https://wa.me/6288220588345" target="_blank" rel="noopener" class="text-white-50">088220588345</a></li>
+                        <li class="mb-2"><i class="fab fa-instagram me-2"></i> <a href="https://instagram.com/pulsa.id" target="_blank" rel="noopener" class="text-white-50">@pulsa.id</a></li>
                     </ul>
                 </div>
             </div>

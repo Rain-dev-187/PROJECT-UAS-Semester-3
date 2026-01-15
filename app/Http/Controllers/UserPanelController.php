@@ -14,9 +14,9 @@ class UserPanelController extends Controller
     {
         $user = auth()->user();
 
-        // Opini stats and list
+        // Opini stats and list - filter hanya approved untuk ditampilkan
         $opiniQuery = Opini::where('user_id', $user->id);
-        $opinis = $opiniQuery->latest()->take(10)->get();
+        $opinis = $opiniQuery->where('status', 'approved')->latest()->take(10)->get();
         $opiniCounts = [
             'total' => $opiniQuery->count(),
             'approved' => $opiniQuery->where('status', 'approved')->count(),
@@ -77,8 +77,11 @@ class UserPanelController extends Controller
 
         $user->update($data);
 
+        // Refresh user data after update
+        auth()->user()->refresh();
+
         // Redirect user to the appropriate panel depending on role
-        if (auth()->user() && method_exists(auth()->user(), 'hasAnyRole') && auth()->user()->hasAnyRole(['super-admin','staff'])) {
+        if (auth()->user()->hasAnyRole(['super-admin','admin'])) {
             return redirect()->route('admin.dashboard')->with('success', 'Profil berhasil diperbarui.');
         }
 

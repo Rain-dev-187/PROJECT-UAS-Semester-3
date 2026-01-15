@@ -59,4 +59,6 @@ Route::middleware(['auth','ensure.admin'])->prefix('admin')->name('admin.')->gro
 Route::get('/user/panel', [UserPanelController::class, 'userPanel'])->name('user.panel')->middleware('auth');
 Route::get('/user/profile', [UserPanelController::class, 'editProfile'])->name('user.profile.edit')->middleware('auth');
 Route::put('/user/profile', [UserPanelController::class, 'updateProfile'])->name('user.profile.update')->middleware('auth');
+Route::get('/user/opini/{opini}/edit', [UserPanelController::class, 'editOpini'])->name('user.opini.edit')->middleware('auth');
+Route::put('/user/opini/{opini}', [UserPanelController::class, 'updateOpini'])->name('user.opini.update')->middleware('auth');
 Route::get('/guest/panel', [UserPanelController::class, 'guestPanel'])->name('guest.panel')->middleware('guest');

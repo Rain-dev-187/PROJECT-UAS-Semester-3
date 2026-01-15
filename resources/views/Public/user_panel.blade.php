@@ -178,9 +178,10 @@
                                     <td class="text-muted small">{{ $op->created_at->format('d/m/Y') }}</td>
                                     <td class="text-end pe-4">
                                         @if($op->status === 'approved')
-                                            <a href="{{ route('opini.show', $op->slug) }}" class="btn btn-sm btn-light text-primary"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('opini.show', $op->slug) }}" class="btn btn-sm btn-light text-primary" title="Lihat"><i class="fas fa-eye"></i></a>
                                         @else
-                                            <span class="text-muted small"><i class="fas fa-lock"></i> Belum dipublikasikan</span>
+                                            <a href="{{ route('user.opini.edit', $op->id) }}" class="btn btn-sm btn-light text-warning" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <span class="text-muted small ms-2"><i class="fas fa-lock"></i> Belum dipublikasikan</span>
                                         @endif
                                     </td>
                                 </tr>

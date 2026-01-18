@@ -36,28 +36,6 @@
         transform: translateY(-5px);
         box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
-    .quick-action-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        padding: 20px;
-        border-radius: 12px;
-        border: 2px dashed #e0e0e0;
-        color: #555;
-        text-decoration: none;
-        transition: all 0.2s;
-        height: 100%;
-    }
-    .quick-action-btn:hover {
-        border-color: var(--primary);
-        color: var(--primary);
-        background: rgba(30, 58, 95, 0.05);
-    }
-    .quick-action-btn i {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
     .table-custom th {
         background-color: #f8f9fa;
         font-weight: 600;
@@ -118,38 +96,7 @@
         </div>
     </div>
 
-    <!-- Quick Actions & Stats -->
-    <div class="row g-4 mb-4">
-        <!-- Stats Opini -->
-        <div class="col-md-6 col-lg-3">
-            <div class="stat-card-custom d-flex flex-column justify-content-between">
-                <div>
-                    <div class="text-muted small fw-bold text-uppercase mb-1">Total Opini</div>
-                    <div class="d-flex align-items-baseline">
-                        <h2 class="fw-bold mb-0 text-primary">{{ $opiniCounts['total'] }}</h2>
-                        <span class="ms-2 badge bg-success bg-opacity-10 text-success rounded-pill">
-                            {{ $opiniCounts['approved'] }} Approved
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-3 text-muted small">
-                    <i class="fas fa-clock text-warning me-1"></i> {{ $opiniCounts['pending'] }} Menunggu Review
-                </div>
-            </div>
-        </div>
 
-        <!-- Suara Pembaca removed -->
-
-        <!-- Action: Kirim Opini -->
-        <div class="col-6 col-lg-3">
-            <a href="{{ route('kirim-opini') }}" class="quick-action-btn">
-                <i class="fas fa-pen text-primary"></i>
-                <span class="fw-bold">Kirim Opini Baru</span>
-            </a>
-        </div>
-
-       
-    </div>
 
     <div class="row g-4">
         <!-- Recent Opini -->

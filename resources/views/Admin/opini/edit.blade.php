@@ -60,7 +60,7 @@
                         <label class="form-label">Foto Penulis</label>
                         @if($opini->penulis_foto)
                             <div class="mb-3">
-                                <img src="{{ asset('storage/'.$opini->penulis_foto) }}" alt="" class="img-preview">
+                                <img src="{{ asset('storage/'.$opini->penulis_foto) }}" alt="" style="max-width: 150px; height: auto; border-radius: 8px;">
                             </div>
                         @endif
                         <input type="file" name="penulis_foto" class="form-control @error('penulis_foto') is-invalid @enderror" accept="image/*">

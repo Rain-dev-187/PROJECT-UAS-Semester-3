@@ -228,27 +228,5 @@
         </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="stat-card">
-                <h6 class="mb-3"><i class="fas fa-bolt me-2 text-warning"></i>Aksi Cepat</h6>
-                <div class="d-flex flex-wrap gap-2">
-                    @can('manage berita')
-                        <a href="{{ route('admin.berita.create') }}" class="btn btn-primary-custom">
-                            <i class="fas fa-plus me-2"></i>Tambah Berita
-                        </a>
-                    @endcan
-                    @can('manage opini')
-                        <a href="{{ route('admin.opini.create') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-plus me-2"></i>Tambah Opini
-                        </a>
-                    @endcan
-                    <a href="{{ route('home') }}" class="btn btn-outline-secondary" target="_blank">
-                        <i class="fas fa-external-link-alt me-2"></i>Lihat Website
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection

@@ -41,15 +41,6 @@
             
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <label class="form-label">Jabatan</label>
-                    <input type="text" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror" 
-                           value="{{ old('jabatan', $team->jabatan) }}">
-                    @error('jabatan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                
-                <div class="col-md-6 mb-4">
                     <label class="form-label">Urutan</label>
                     <input type="number" name="urutan" class="form-control @error('urutan') is-invalid @enderror" 
                            value="{{ old('urutan', $team->urutan) }}">

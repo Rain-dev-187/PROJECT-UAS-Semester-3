@@ -80,7 +80,7 @@
                     <div class="me-3 text-muted small">
                         <div>{{ auth()->user()->email ?? '' }}</div>
                         @if(auth()->user()->nickname)
-                            <div><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</div>
+                            <div><i class="fas fa-user-tag me-1"></i>{{ auth()->user()->nickname }}</div>
                         @endif
                     </div>
                 </div>

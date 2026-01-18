@@ -22,7 +22,6 @@
                         <th>Foto</th>
                         <th>Nama</th>
                         <th>NPM</th>
-                        <th>Jabatan</th>
                         <th>Urutan</th>
                         <th>Status</th>
                         <th width="120">Aksi</th>
@@ -38,7 +37,6 @@
                             </td>
                             <td><strong>{{ $team->nama }}</strong></td>
                             <td>{{ $team->npm ?? '-' }}</td>
-                            <td>{{ $team->jabatan ?? '-' }}</td>
                             <td>{{ $team->urutan }}</td>
                             <td>
                                 @if($team->is_active)

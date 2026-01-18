@@ -38,6 +38,9 @@
         box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         transition: all 0.3s;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     .team-card:hover {
@@ -45,13 +48,19 @@
         box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
     
-    .team-card img {
+    .img-wrapper {
         width: 120px;
         height: 120px;
-        border-radius: 15px;
-        object-fit: cover;
-        margin-bottom: 15px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 auto 15px;
         border: 4px solid var(--light);
+    }
+
+    .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         transition: all 0.3s;
     }
     
@@ -69,11 +78,6 @@
         color: var(--accent);
         font-size: 0.85rem;
         font-weight: 500;
-    }
-    
-    .team-card .jabatan {
-        color: #888;
-        font-size: 0.8rem;
     }
     
     .contact-card {
@@ -170,13 +174,12 @@
             @foreach($teams as $team)
                 <div class="col-6 col-md-4 col-lg-3">
                     <div class="team-card">
+                        <div class="img-wrapper">
                             <img src="{{ $team->foto ? asset('storage/'.$team->foto) : 'https://ui-avatars.com/api/?name='.urlencode($team->nama).'&background=1e3a5f&color=fff&size=120' }}" 
                                 alt="{{ $team->nama }}">
+                        </div>
                         <h6>{{ $team->nama }}</h6>
                         <div class="npm">{{ $team->npm }}</div>
-                        @if($team->jabatan)
-                            <div class="jabatan">{{ $team->jabatan }}</div>
-                        @endif
                     </div>
                 </div>
             @endforeach

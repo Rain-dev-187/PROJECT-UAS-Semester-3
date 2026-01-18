@@ -12,7 +12,6 @@ class Team extends Model
     protected $fillable = [
         'nama',
         'npm',
-        'jabatan',
         'foto',
         'urutan',
         'is_active',

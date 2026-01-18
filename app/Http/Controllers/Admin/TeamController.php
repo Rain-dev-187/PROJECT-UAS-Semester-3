@@ -25,12 +25,11 @@ class TeamController extends Controller
         $request->validate([
             'nama' => 'required|max:100',
             'npm' => 'nullable|max:20',
-            'jabatan' => 'nullable|max:100',
             'foto' => 'nullable|image|max:2048',
             'urutan' => 'integer',
         ]);
 
-        $data = $request->only(['nama', 'npm', 'jabatan', 'urutan']);
+        $data = $request->only(['nama', 'npm', 'urutan']);
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('foto')) {
@@ -52,12 +51,11 @@ class TeamController extends Controller
         $request->validate([
             'nama' => 'required|max:100',
             'npm' => 'nullable|max:20',
-            'jabatan' => 'nullable|max:100',
             'foto' => 'nullable|image|max:2048',
             'urutan' => 'integer',
         ]);
 
-        $data = $request->only(['nama', 'npm', 'jabatan', 'urutan']);
+        $data = $request->only(['nama', 'npm', 'urutan']);
         $data['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('foto')) {

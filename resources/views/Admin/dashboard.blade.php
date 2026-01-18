@@ -41,7 +41,10 @@
                             <div class="fw-bold">{{ auth()->user()->name }}</div>
                             <div class="text-muted small">{{ auth()->user()->email }}</div>
                             @if(auth()->user()->nickname)
-                                <div class="text-muted small"><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</div>
+                                <div class="text-muted small"><i class="fas fa-user-tag me-1"></i>{{ auth()->user()->nickname }}</div>
+                            @endif
+                            @if(auth()->user()->profesi)
+                                <div class="text-muted small"><i class="fas fa-id-badge me-1"></i>{{ auth()->user()->profesi }}</div>
                             @endif
                         </div>
                     </div>

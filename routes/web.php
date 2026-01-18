@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\OpiniController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\UserPanelController;
 
 // Public Routes
@@ -39,6 +40,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth','ensure.admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    
     Route::resource('berita', BeritaController::class)->parameters(['berita' => 'berita']);
     
     Route::resource('opini', OpiniController::class);
@@ -59,6 +63,4 @@ Route::middleware(['auth','ensure.admin'])->prefix('admin')->name('admin.')->gro
 Route::get('/user/panel', [UserPanelController::class, 'userPanel'])->name('user.panel')->middleware('auth');
 Route::get('/user/profile', [UserPanelController::class, 'editProfile'])->name('user.profile.edit')->middleware('auth');
 Route::put('/user/profile', [UserPanelController::class, 'updateProfile'])->name('user.profile.update')->middleware('auth');
-Route::get('/user/opini/{opini}/edit', [UserPanelController::class, 'editOpini'])->name('user.opini.edit')->middleware('auth');
-Route::put('/user/opini/{opini}', [UserPanelController::class, 'updateOpini'])->name('user.opini.update')->middleware('auth');
 Route::get('/guest/panel', [UserPanelController::class, 'guestPanel'])->name('guest.panel')->middleware('guest');

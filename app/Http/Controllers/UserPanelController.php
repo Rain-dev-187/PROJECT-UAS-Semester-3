@@ -45,6 +45,10 @@ class UserPanelController extends Controller
     public function editProfile()
     {
         $user = auth()->user();
+        // Admin users get admin profile view
+        if ($user->hasAnyRole(['super-admin', 'admin'])) {
+            return view('admin.profile', compact('user'));
+        }
         return view('Public.profile', compact('user'));
     }
 
@@ -55,6 +59,7 @@ class UserPanelController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'nickname' => 'nullable|max:100',
+            'profesi' => 'nullable|max:100',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'nullable|min:8|confirmed',
             'photo' => 'nullable|image|max:2048',
@@ -63,6 +68,7 @@ class UserPanelController extends Controller
         $data = [
             'name' => $request->name,
             'nickname' => $request->nickname,
+            'profesi' => $request->profesi,
             'email' => $request->email,
         ];
 
@@ -86,44 +92,5 @@ class UserPanelController extends Controller
         }
 
         return redirect()->route('user.panel')->with('success', 'Profil berhasil diperbarui.');
-    }
-
-    public function editOpini(Opini $opini)
-    {
-        // Ensure user owns this opini
-        if ($opini->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
-        }
-
-        return view('Public.edit-opini', compact('opini'));
-    }
-
-    public function updateOpini(Request $request, Opini $opini)
-    {
-        // Ensure user owns this opini
-        if ($opini->user_id !== auth()->id()) {
-            abort(403, 'Unauthorized');
-        }
-
-        $request->validate([
-            'judul' => 'required|max:255',
-            'konten' => 'required|min:100',
-            'penulis_profesi' => 'nullable|max:100',
-            'penulis_foto' => 'nullable|image|max:2048',
-        ]);
-
-        $data = $request->only(['judul', 'konten', 'penulis_profesi']);
-        
-        // Handle foto penulis jika ada upload baru
-        if ($request->hasFile('penulis_foto')) {
-            $data['penulis_foto'] = $request->file('penulis_foto')->store('opini/penulis', 'public');
-        }
-
-        // Reset status ke pending ketika di-update
-        $data['status'] = 'pending';
-
-        $opini->update($data);
-
-        return redirect()->route('user.panel')->with('success', 'Opini berhasil diperbarui dan menunggu persetujuan admin.');
     }
 }

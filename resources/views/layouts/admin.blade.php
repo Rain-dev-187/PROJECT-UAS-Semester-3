@@ -58,9 +58,6 @@
                     <li class="nav-item d-flex align-items-center">
                         <div class="d-flex flex-column">
                             <span class="text-muted small">{{ auth()->user()->email ?? '' }}</span>
-                            @if(auth()->user()->nickname)
-                                <span class="text-muted small"><i class="fas fa-briefcase me-1"></i>{{ auth()->user()->nickname }}</span>
-                            @endif
                         </div>
                     </li>
                     <li class="nav-item">
